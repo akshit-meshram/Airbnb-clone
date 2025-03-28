@@ -3,6 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
+import ClientOnly from "./components/ClientOnly";
+import Modal from './components/modals/Modal'
+import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
+import LoginModal from "./components/modals/LoginModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +38,12 @@ export default function RootLayout({
       <body
         className={nunito.className} 
       >
-        <Navbar />
+        <ClientOnly>
+          <ToasterProvider />
+          <LoginModal />
+          <RegisterModal />
+            <Navbar />
+        </ClientOnly>
         {children}
       </body>
     </html>
